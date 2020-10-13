@@ -5,6 +5,40 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="TextViewTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:background">@color/colorWhite</item>
+    </style>
+
+    <style name="TextViewDetails">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/details_text_view_text_size</item>
+        <item name="android:paddingRight">@dimen/details_text_view_padding</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="TextViewDetailsTitle" parent="TextViewDetails">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextViewSpecialistList">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/details_text_view_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
     </style>
 
 </resources>

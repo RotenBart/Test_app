@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="specialist_age">
+        <item quantity="one">%s год</item>
+        <item quantity="few">%s года</item>
+        <item quantity="many">%s лет</item>
+    </plurals>
+</resources>

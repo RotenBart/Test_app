@@ -4,25 +4,26 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.BaseColumns
 import com.example.testapp.entity.Specialty
 import com.example.testapp.entity.Specialist
 import com.example.testapp.data.SpecialistsContract.SpecialistEntry.AVATAR_URL
 import com.example.testapp.data.SpecialistsContract.SpecialistEntry.BIRTHDAY
 import com.example.testapp.data.SpecialistsContract.SpecialistEntry.FIRST_NAME
+import com.example.testapp.data.SpecialistsContract.SpecialistEntry.ID
 import com.example.testapp.data.SpecialistsContract.SpecialistEntry.LAST_NAME
 import com.example.testapp.data.SpecialistsContract.SpecialistEntry.SPECIALTY
 import com.example.testapp.data.SpecialistsContract.SpecialistEntry.SPECIALISTS_TABLE_NAME
 import com.example.testapp.data.SpecialistsContract.SpecialtyEntry.SPECIALTIES_TABLE_NAME
 import com.example.testapp.data.SpecialistsContract.SpecialtyEntry.SPECIALTY_ID
 import com.example.testapp.data.SpecialistsContract.SpecialtyEntry.SPECIALTY_NAME
+import kotlin.collections.ArrayList
 
 class SpecialistsDbHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val CREATE_TABLE_SPECIALISTS = "CREATE TABLE $SPECIALISTS_TABLE_NAME (" +
-                "${BaseColumns._ID} INTEGER PRIMARY KEY," +
+                "$ID INTEGER PRIMARY KEY," +
                 "$FIRST_NAME TEXT," +
                 "$LAST_NAME TEXT," +
                 "$BIRTHDAY TEXT," +
@@ -54,10 +55,12 @@ class SpecialistsDbHelper(context: Context) :
         onUpgrade(db, oldVersion, newVersion)
     }
 
-    fun clearDb(){
-        val db= this.readableDatabase
-        db.execSQL(DELETE_TABLE_SPECIALISTS)
-        db.execSQL(DELETE_TABLE_SPECIALTIES)
+    fun clearDb() {
+        val db = this.writableDatabase
+//        db.execSQL(DELETE_DATA_FROM_TABLE_SPECIALTIES)
+//        db.execSQL(DELETE_DATA_FROM_TABLE_SPECIALISTS)
+        db.delete(SPECIALISTS_TABLE_NAME, null,null)
+        db.delete(SPECIALTIES_TABLE_NAME, null,null)
     }
 
     fun createSpecialty(specialty: Specialty) {
@@ -69,28 +72,38 @@ class SpecialistsDbHelper(context: Context) :
     }
 
     fun createSpecialist(specialist: Specialist) {
+        specialist.formatSpecialistName()
         val values = ContentValues().apply {
             put(FIRST_NAME, specialist.firstName)
             put(LAST_NAME, specialist.lastName)
-            put(BIRTHDAY, specialist.birthday)
+            put(BIRTHDAY, specialist.getReformattedBirthday())
             put(AVATAR_URL, specialist.avatarUrl)
             put(SPECIALTY, specialist.specialty?.get(0)?.specialtyId)
         }
         specialist.id = this.writableDatabase.insert(SPECIALISTS_TABLE_NAME, null, values)
     }
 
-    fun getAllSpecialistsBySpecialtyId(id: Int?): ArrayList<Specialist> {
+//    private fun reformatBirthdayString(birthday: String?): String? {
+//        if(!birthday.isNullOrEmpty()) {
+//            val oldDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+//            val newDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+//            return newDateFormat.format(oldDateFormat.parse(birthday))
+//        } else return null
+//    }
+
+    fun getAllSpecialistsBySpecialtyId(specialtyId: Int?): ArrayList<Specialist> {
         val specialistList = arrayListOf<Specialist>()
         val selectQuery =
             "SELECT * FROM " +
                     SPECIALISTS_TABLE_NAME +
                     " WHERE " +
                     SPECIALTY +
-                    " = " + id
+                    " = " + specialtyId
         val cursor = this.readableDatabase.rawQuery(selectQuery, null)
         with(cursor) {
             while (moveToNext()) {
                 val specialist = Specialist().apply {
+                    id = cursor.getLong(cursor.getColumnIndex(ID))
                     firstName = cursor.getString(cursor.getColumnIndex(FIRST_NAME))
                     lastName = cursor.getString(cursor.getColumnIndex(LAST_NAME))
                     birthday = cursor.getString(cursor.getColumnIndex(BIRTHDAY))
@@ -102,10 +115,36 @@ class SpecialistsDbHelper(context: Context) :
         return specialistList
     }
 
-    fun getSpecialtyNameById(id: Int): String {
+    fun getSpecialistById(id: Int?): Specialist {
+        val specialist: Specialist
+        val selectQuery =
+            "SELECT * FROM " +
+                    SPECIALISTS_TABLE_NAME +
+                    " WHERE " +
+                    ID +
+                    "=" + id
+        val cursor = this.readableDatabase.rawQuery(selectQuery, null)
+        with(cursor) {
+            moveToFirst()
+            specialist = Specialist().apply {
+                firstName = cursor.getString(cursor.getColumnIndex(FIRST_NAME))
+                lastName = cursor.getString(cursor.getColumnIndex(LAST_NAME))
+                birthday = cursor.getString(cursor.getColumnIndex(BIRTHDAY))
+                avatarUrl = cursor.getString(cursor.getColumnIndex(AVATAR_URL))
+                specialty = arrayListOf(Specialty().apply {
+                    this.specialtyId = cursor.getInt(cursor.getColumnIndex(SPECIALTY))
+                    this.specialtyName = getSpecialtyNameById(this.specialtyId)
+                })
+            }
+        }
+        return specialist
+    }
+
+
+    fun getSpecialtyNameById(id: Int?): String {
         val specialtyName: String
         val selectQuery =
-            "SELECT" + SPECIALTY_NAME + "FROM" + SPECIALTIES_TABLE_NAME + "WHERE" + SPECIALTY_ID + "=" + id
+            "SELECT $SPECIALTY_NAME FROM $SPECIALTIES_TABLE_NAME WHERE $SPECIALTY_ID=$id"
         val cursor = this.readableDatabase.rawQuery(selectQuery, null)
         with(cursor) {
             moveToFirst()
