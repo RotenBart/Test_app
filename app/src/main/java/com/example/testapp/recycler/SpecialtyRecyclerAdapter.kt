@@ -48,7 +48,7 @@ class SpecialtyRecyclerAdapter(
             is SpecialistViewHolder -> {
                 holder.bind(element as Specialist)
                 holder.itemView.setOnClickListener{
-                    element.id?.let { id -> specialtyClick?.invoke(id.toInt()) }
+                    element.id?.let { id -> specialistClick?.invoke(id.toInt()) }
                 }
             }
             else -> throw IllegalArgumentException()
@@ -60,8 +60,7 @@ class SpecialtyRecyclerAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        val value = adapterList[position]
-        return when (value) {
+        return when (adapterList[position]) {
             is Specialist -> TYPE_SPECIALIST
             is Specialty -> TYPE_SPECIALTY
             else -> throw IllegalArgumentException("Invalid type of data $position")
@@ -88,7 +87,7 @@ class SpecialtyRecyclerAdapter(
         override fun bind(item: Specialist) {
             specialistFirstName.text = item.firstName
             specialistLastName.text = item.lastName
-            specialistAge.text = item.birthday
+            specialistAge.text = item.getSpecialistAge()
         }
     }
 

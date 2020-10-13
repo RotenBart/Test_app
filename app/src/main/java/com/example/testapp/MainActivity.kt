@@ -10,6 +10,7 @@ import com.example.testapp.entity.Specialty
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,12 +37,18 @@ class MainActivity : AppCompatActivity() {
                 }
             )
         )
+        setSupportActionBar(toolbar)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
     }
 
-//    override fun onDestroy() {
-//        clearDb()
-//        super.onDestroy()
-//    }
+    override fun onDestroy() {
+        super.onDestroy()
+        clearDb()
+    }
 
     private fun createDb() {
         val dbHelper = SpecialistsDbHelper(this)

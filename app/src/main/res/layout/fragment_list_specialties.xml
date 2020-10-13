@@ -13,7 +13,7 @@
         android:paddingTop="16dp"
         android:textSize="14sp"
         android:textAlignment="center"
-        android:text="Выберите специальность для отображения списка специалистов"
+        android:text="@string/fragment_specialties_list_title_text"
         android:gravity="center_horizontal" />
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recyclerView"

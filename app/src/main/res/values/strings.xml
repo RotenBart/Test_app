@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Test App</string>
+    <string name="fragment_specialist_details_fio_title">ФИО:</string>
+    <string name="fragment_specialist_details_birthday_title">Дата рождения:</string>
+    <string name="fragment_specialist_details_age_title">Возраст:</string>
+    <string name="fragment_specialist_details_image_view_avatar_descr">avatar</string>
+    <string name="fragment_specialist_details_specialty_title">Специальность:</string>
+    <string name="fragment_specialties_list_title_text">Выберите специальность для отображения списка специалистов</string>
+    <string name="fragment_specialists_list_title_text">Выберите специалиста для отображения информации</string>
 </resources>

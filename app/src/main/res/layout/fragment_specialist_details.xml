@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/specialistAvatar"
+        app:layout_constraintTop_toTopOf="@+id/nameLayout"
+        app:layout_constraintBottom_toBottomOf="@id/specialtyLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:contentDescription="@string/fragment_specialist_details_image_view_avatar_descr"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/nameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@id/specialistAvatar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/TextViewDetailsTitle"
+            android:text="@string/fragment_specialist_details_fio_title" />
+        <TextView
+            android:id="@+id/specialistFirstName"
+            style="@style/TextViewDetails"
+            tools:text="Иван" />
+
+        <TextView
+            android:id="@+id/specialistLastName"
+            style="@style/TextViewDetails"
+            tools:text="Иванов" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/birthdayLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/nameLayout"
+        app:layout_constraintStart_toEndOf="@id/specialistAvatar"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/specialistBirthdayTitle"
+            style="@style/TextViewDetailsTitle"
+            android:text="@string/fragment_specialist_details_birthday_title" />
+        <TextView
+            android:id="@+id/specialistBirthdayTextView"
+            style="@style/TextViewDetails"
+            tools:text="23.12.2000" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ageLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/birthdayLayout"
+        app:layout_constraintStart_toEndOf="@id/specialistAvatar"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/specialistAgeTitle"
+            style="@style/TextViewDetailsTitle"
+            android:text="@string/fragment_specialist_details_age_title" />
+        <TextView
+            android:id="@+id/specialistAgeTextView"
+            style="@style/TextViewDetails"
+            tools:text="19 лет" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/specialtyLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ageLayout"
+        app:layout_constraintStart_toEndOf="@id/specialistAvatar"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/specialtyTitle"
+            style="@style/TextViewDetailsTitle"
+            android:text="@string/fragment_specialist_details_specialty_title" />
+        <TextView
+            android:id="@+id/specialtyTextView"
+            style="@style/TextViewDetails"
+            tools:text="Менеджер" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
