@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
 
     <LinearLayout
+        android:id="@+id/specialistLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -14,14 +17,12 @@
 
         <TextView
             android:id="@+id/specialistFirstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextViewSpecialistList"
             tools:text="Иван" />
 
         <TextView
             android:id="@+id/specialistLastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextViewSpecialistList"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:paddingEnd="10dp"
@@ -30,8 +31,7 @@
 
         <TextView
             android:id="@+id/specialistAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextViewSpecialistList"
             tools:text="25 лет" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

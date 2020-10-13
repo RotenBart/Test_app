@@ -10,10 +10,6 @@ import com.example.testapp.SpecialistListFragment.Companion.ID
 import com.example.testapp.data.SpecialistsDbHelper
 import com.example.testapp.entity.Specialist
 import kotlinx.android.synthetic.main.fragment_specialist_details.*
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.Period
-import java.util.*
 
 class SpecialistDetailsFragment : Fragment() {
 
@@ -58,20 +54,5 @@ class SpecialistDetailsFragment : Fragment() {
             specialistAgeTextView.text = "-"
         }
         specialtyTextView.text = specialist.specialty?.get(0)?.specialtyName
-    }
-
-    private fun countAge(specialistBirthday: String): String {
-        val today = Calendar.getInstance()
-        val birthday = Calendar.getInstance()
-        val format = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        val birthDate = format.parse(specialistBirthday)
-        if (birthDate != null) {
-            birthday.time = birthDate
-        }
-        var age = today.get(Calendar.YEAR) - birthday.get(Calendar.YEAR)
-        if (today.get(Calendar.DAY_OF_YEAR) < birthday.get(Calendar.DAY_OF_YEAR)) {
-            age--
-        }
-        return age.toString()
     }
 }

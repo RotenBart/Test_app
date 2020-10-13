@@ -7,4 +7,6 @@
     <string name="fragment_specialist_details_specialty_title">Специальность:</string>
     <string name="fragment_specialties_list_title_text">Выберите специальность для отображения списка специалистов</string>
     <string name="fragment_specialists_list_title_text">Выберите специалиста для отображения информации</string>
+    <string name="fragment_specialists_list_age_text">%1$s лет</string>
+
 </resources>

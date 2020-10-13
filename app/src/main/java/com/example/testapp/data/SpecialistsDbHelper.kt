@@ -16,8 +16,6 @@ import com.example.testapp.data.SpecialistsContract.SpecialistEntry.SPECIALISTS_
 import com.example.testapp.data.SpecialistsContract.SpecialtyEntry.SPECIALTIES_TABLE_NAME
 import com.example.testapp.data.SpecialistsContract.SpecialtyEntry.SPECIALTY_ID
 import com.example.testapp.data.SpecialistsContract.SpecialtyEntry.SPECIALTY_NAME
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SpecialistsDbHelper(context: Context) :
@@ -38,8 +36,6 @@ class SpecialistsDbHelper(context: Context) :
 
         private const val DELETE_TABLE_SPECIALISTS = "DROP TABLE IF EXISTS $SPECIALISTS_TABLE_NAME"
         private const val DELETE_TABLE_SPECIALTIES = "DROP TABLE IF EXISTS $SPECIALTIES_TABLE_NAME"
-        private const val DELETE_DATA_FROM_TABLE_SPECIALTIES = "DELETE FROM $SPECIALTIES_TABLE_NAME"
-        private const val DELETE_DATA_FROM_TABLE_SPECIALISTS = "DELETE FROM $SPECIALISTS_TABLE_NAME"
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "Specialists.db"
     }
